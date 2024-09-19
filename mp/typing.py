@@ -3,7 +3,7 @@ This module provides runtime support for type hints.
 based on : https://github.com/micropython/micropython-lib/pull/584
 """
 
-DEBUG = False
+# DEBUG = False
 
 
 # def trace(func):
