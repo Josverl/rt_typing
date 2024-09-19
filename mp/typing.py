@@ -22,6 +22,12 @@ def cast(type, val):
     return val
 
 
+def reveal_type(val):
+    # https://docs.python.org/3/library/typing.html#typing.reveal_type
+    print(val.__class__.__name__)
+    return val
+
+
 # not clear if we need this ( 23 bytes)
 # def get_origin(type):
 #     # https://docs.python.org/3/library/typing.html#typing.get_origin
