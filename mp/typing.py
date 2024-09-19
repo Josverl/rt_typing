@@ -36,10 +36,10 @@ def reveal_type(val):
 
 
 # not clear if we need this ( 22 bytes)
-# def get_args(type):
-#     # https://docs.python.org/3/library/typing.html#typing.get_args
-#     # Python 3.8+ only
-#     return ()
+def get_args(type):
+    # https://docs.python.org/3/library/typing.html#typing.get_args
+    # Python 3.8+ only
+    return ()
 
 
 def no_type_check(x):
