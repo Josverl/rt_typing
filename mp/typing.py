@@ -17,52 +17,64 @@ based on : https://github.com/micropython/micropython-lib/pull/584
 #     else:
 #         return func
 
-
-def cast(type, val):
-    return val
-
-
-def reveal_type(val):
-    # https://docs.python.org/3/library/typing.html#typing.reveal_type
-    print(val.__class__.__name__)
-    return val
+# -----------------
+# typing essentials
+# -----------------
 
 
-# not clear if we need this ( 23 bytes)
-# def get_origin(type):
-#     # https://docs.python.org/3/library/typing.html#typing.get_origin
-#     #  Return None for all unsupported objects.
-#     return None
-
-
-# not clear if we need this ( 22 bytes)
-def get_args(type):
-    # https://docs.python.org/3/library/typing.html#typing.get_args
-    # Python 3.8+ only
-    return ()
-
-
-def no_type_check(x):
-    # decorator to disable type checking on a function or method
-    # https://docs.python.org/3/library/typing.html#typing.no_type_check
-    return x
-
-
-def final(x):
+def final(x):  # ( 18 bytes)
     # decorator to indicate that a method should not be overridden
     # https://docs.python.org/3/library/typing.html#typing.final
     return x
 
 
-def overload(func):
-    # ignore functions with overload decorator
+def overload(func):  # ( 27 bytes)
+    # ignore functions signatures with @overload decorator
     return None
 
 
-def NewType(name, type):
+def NewType(name, type):  # (21 bytes)
     # https://docs.python.org/3/library/typing.html#newtype
-    # just use the original type.
+    # MP > just use the original type.
     return type
+
+
+# ---------------
+#  useful methods
+# ---------------
+
+
+def cast(type, val):  # ( 23 bytes)
+    return val
+
+
+def no_type_check(x):  # ( 26 bytes)
+    # decorator to disable type checking on a function or method
+    # https://docs.python.org/3/library/typing.html#typing.no_type_check
+    return x
+
+
+# -------------------
+# less useful methods
+# -------------------
+
+
+def reveal_type(val):  # ( 38 bytes)
+    # https://docs.python.org/3/library/typing.html#typing.reveal_type
+    print(val.__class__.__name__)
+    return val
+
+
+def get_origin(type):  # ( 23 bytes)
+    # https://docs.python.org/3/library/typing.html#typing.get_origin
+    #  Return None for all unsupported objects.
+    return None
+
+
+def get_args(type):  # ( 22 bytes)
+    # https://docs.python.org/3/library/typing.html#typing.get_args
+    # Python 3.8+ only
+    return ()
 
 
 class __Ignore:
