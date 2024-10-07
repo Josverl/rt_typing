@@ -1,5 +1,28 @@
 {
     "python.analysis.diagnosticSeverityOverrides": {
         "reportShadowedImports": "none"
-    }
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#bb6ec4",
+        "activityBar.background": "#bb6ec4",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#d1ca8e",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "editorGroup.border": "#bb6ec4",
+        "panel.border": "#bb6ec4",
+        "sash.hoverBorder": "#bb6ec4",
+        "statusBar.background": "#aa4ab5",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#bb6ec4",
+        "statusBarItem.remoteBackground": "#aa4ab5",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "tab.activeBorder": "#bb6ec4",
+        "titleBar.activeBackground": "#aa4ab5",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#aa4ab599",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#aa4ab5"
 }
