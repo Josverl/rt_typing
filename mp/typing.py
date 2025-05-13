@@ -3,16 +3,17 @@ This module provides runtime support for type hints.
 based on : https://github.com/micropython/micropython-lib/pull/584
 """
 
-# DEBUG = False
 
-
+# DEBUG = True
 # def trace(func):
 #     if DEBUG:
-
 #         def wrapper(*args, **kwargs):
-#             print(f"Trace: {func.__name__} called with args={args}, kwargs={kwargs}")
-#             return func(*args, **kwargs)
-
+#             try: 
+#                 print(f"Trace: {func.__name__} called with args={args}, kwargs={kwargs}")
+#                 return func(*args, **kwargs)
+#             except AttributeError as e:
+#                 print(f"Trace: {func.__class__} called with args={args}, kwargs={kwargs}")
+#                 # return func
 #         return wrapper
 #     else:
 #         return func
@@ -38,19 +39,40 @@ def NewType(name, type):  # (21 bytes)
     # MP > just use the original type.
     return type
 
+# ---------------------
+# User-defined generic types
+# PEP 560 , Python 3.9
+# ----------------------
+class TypeVar:
+    def __init__(self, name: str = ""):
+        pass
+    def __typing_subst__(self, arg):
+        return self
+class _GenericClass:
+    def __init__(self):
+        pass
+    # MicroPython does not handle __class_getitem__ yet
+    @classmethod
+    def __class_getitem__(self, key):
+        return self
+    @classmethod
+    def __getitem__(self, key):
+        return self
+
+Generic = _GenericClass()
 
 # ---------------
 #  useful methods
 # ---------------
 
-
+# https://docs.python.org/3/library/typing.html#typing.cast
 def cast(type, val):  # ( 23 bytes)
     return val
 
 
+# https://docs.python.org/3/library/typing.html#typing.no_type_check
 def no_type_check(x):  # ( 26 bytes)
     # decorator to disable type checking on a function or method
-    # https://docs.python.org/3/library/typing.html#typing.no_type_check
     return x
 
 
