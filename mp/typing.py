@@ -4,19 +4,19 @@ based on : https://github.com/micropython/micropython-lib/pull/584
 """
 
 
-# DEBUG = True
-# def trace(func):
-#     if DEBUG:
-#         def wrapper(*args, **kwargs):
-#             try: 
-#                 print(f"Trace: {func.__name__} called with args={args}, kwargs={kwargs}")
-#                 return func(*args, **kwargs)
-#             except AttributeError as e:
-#                 print(f"Trace: {func.__class__} called with args={args}, kwargs={kwargs}")
-#                 # return func
-#         return wrapper
-#     else:
-#         return func
+DEBUG = True
+def trace(func):
+    if DEBUG:
+        def wrapper(*args, **kwargs):
+            try: 
+                print(f"Trace: {func.__name__} called with args={args}, kwargs={kwargs}")
+                return func(*args, **kwargs)
+            except AttributeError as e:
+                print(f"Trace: {func.__class__} called with args={args}, kwargs={kwargs}")
+                # return func
+        return wrapper
+    else:
+        return func
 
 # -----------------
 # typing essentials
@@ -48,15 +48,19 @@ class TypeVar:
         pass
     def __typing_subst__(self, arg):
         return self
-class _GenericClass:
-    def __init__(self):
+class _GenericClass():
+    def __init__(self, *args, **kwargs):
         pass
     # MicroPython does not handle __class_getitem__ yet
-    @classmethod
-    def __class_getitem__(self, key):
-        return self
-    @classmethod
-    def __getitem__(self, key):
+    # @classmethod
+    # def __class_getitem__(self, *args, **kwargs):
+    #     return Generic
+    def __call__(*args, **kwargs):
+        # May need some guardrails here
+        pass    
+    @trace
+    def __getitem__(self, cls, *args, **kwargs):
+        """instance getter""" 
         return self
 
 Generic = _GenericClass()
@@ -111,7 +115,7 @@ class __Ignore:
         # May need some guardrails here
         pass
 
-    # @trace
+    @trace
     def __getitem__(self, arg):
         # May need some guardrails here
         return __ignore
